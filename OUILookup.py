@@ -1,4 +1,4 @@
-import sys #Modulo sys para interactuar con el interprete de Python
+import sys #Para interactuar con el interprete de Python
 import getopt #Maneja argumentos de la linea de comandos
 import requests #Usada para mostrar mensaje de error en la peticion a la API
 import subprocess #Ejecuta comandos del sistema
@@ -13,7 +13,7 @@ def mostrarAyuda():
 
 #Funcion que consulta el fabricante de una MAC
 def consultarFabricante(mac):
-    link = f"https://api.maclookup.app/v2/macs/{mac}" #link de la API con la direccion mac
+    link = f"https://api.maclookup.app/v2/macs/{mac}" #Link de la API con la direccion mac
     try:
         respuesta = requests.get(link) #Envia una peticion a la API
         fabricante = respuesta.json() #Convierte la repuesta a un diccionario 
@@ -44,7 +44,7 @@ def consultarArp():
         for linea in lineas:
             igual = mac.search(linea) #Busca si hay una direccion mac valida en la linea actual
             if igual:
-               mac_address = linea.group() #Obtiene la direccion mac que se encontro
+               mac_address = igual.group() #Obtiene la direccion mac que se encontro
                consultarFabricante(mac_address)  #Llamamos a la funcion para obtener los fabricantes
     
     except subprocess.CalledProcessError as e:
